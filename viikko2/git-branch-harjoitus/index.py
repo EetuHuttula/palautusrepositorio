@@ -4,6 +4,7 @@ from logger import logger
 from summa import summa
 from erotus import erotus
 
+#2121
 logger("aloitetaan ohjelma")
 x = int(input("luku 1:"))
 y = int(input("luku 2: "))
@@ -13,5 +14,4 @@ logger("lopetetaan")
 print("goodbyee!") # lisäys bugikorjaus-branchissa
 
 logger("lopetetaan ohjelma")
-
 
