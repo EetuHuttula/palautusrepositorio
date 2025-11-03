@@ -1,0 +1,31 @@
+[MASTER]
+ignore=index.py,.pylintrc
+ignore-patterns=.*varasto_test.*
+
+[MESSAGE CONTROL]
+
+disable=raw-checker-failed,
+        bad-inline-option,
+        locally-disabled,
+        file-ignored,
+        suppressed-message,
+        useless-suppression,
+        deprecated-pragma,
+        use-symbolic-message-instead,
+        missing-module-docstring,
+        missing-function-docstring,
+        missing-class-docstring
+
+
+[DESIGN]
+max-line-length = 120
+indent-string = '    '
+max-args=4
+
+[REFACTORING]
+max-nested-blocks = 2
+max-statements = 10
+
+
+[BASIC]
+method-naming-style = snake_case
