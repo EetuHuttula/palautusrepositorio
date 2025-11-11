@@ -1,0 +1,5 @@
+# Retrospektiivi
+
+Retrospektiivi Start, Stop, Continue, More of, Less of Wheel menetelmän avulla tiimi saa palautetta ja oppii kehittämään, mitä kannattaa jatkaa ja mitä uusia käytäntöjä kannattaa ottaa tiimin työprosesseihin mukaan. Pienillä ryhmillä kesto kannattaa pitää 10 minuutissa ja isommilla 25 minuuttia. Menetelmä alkaa, kun fasilitaattori kerää tiimin palautetta visuaalisella pyörällä, joka jakautuu siis Start, Stop, Continue, More of, Less of -alueisiin. Pyörän käytön jälkeen sovitaan konkreettisista muutoksista.
+
+Glad, Sad, Mad -retrospektiivi tarkoituksena on tarkastella sprintin aikana tulleita havaintoja ja kokemuksia. Jokainen osallistuja laittaa sprintin aikana tehdyt havainnot kolmeen kategoriaan: Glad, Sad ja Mad. Tämän jälkeen osallistujat äänestävät, mitkä asiat otetaan keskusteltavaksi, ja ne käsitellään äänimäärän mukaisessa järjestyksessä. Keskustelua jatketaan, kunnes kaikki aiheet ovat käsitelty tai aika loppuu. Tämän menetelmän ajaksi suositellaan 60 minuuttia.
