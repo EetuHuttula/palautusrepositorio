@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pelaa - Kivi-Paperi-Sakset</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            padding: 1rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .game-mode {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .game-over-banner {
+            background: #4CAF50;
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .game-over-banner h2 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .scoreboard {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .scoreboard h2 {
+            color: #333;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .win-requirement {
+            color: #666;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+
+        .scores {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .score-item {
+            text-align: center;
+            padding: 1rem;
+            background: #f9f9f9;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+
+        .score-label {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .score-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #4CAF50;
+        }
+
+        .game-area {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .game-area.disabled {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .game-area h2 {
+            color: #333;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .move-buttons {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .move-buttons input[type="radio"] {
+            display: none;
+        }
+
+        .move-btn {
+            padding: 1.5rem 1rem;
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .move-btn:hover {
+            border-color: #4CAF50;
+            background: #f9f9f9;
+        }
+
+        .move-buttons input[type="radio"]:checked + .move-btn {
+            border-color: #4CAF50;
+            background: #e8f5e9;
+        }
+
+        .player2-input {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #ddd;
+        }
+
+        .player2-input h3 {
+            color: #333;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .input-group {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .input-group input {
+            display: none;
+        }
+
+        .input-group label {
+            padding: 1rem;
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .input-group label:hover {
+            border-color: #4CAF50;
+            background: #f9f9f9;
+        }
+
+        .input-group input:checked + label {
+            border-color: #4CAF50;
+            background: #e8f5e9;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 1rem;
+        }
+
+        .submit-btn:hover:not(:disabled) {
+            background: #45a049;
+        }
+
+        .submit-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .history {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .history h2 {
+            color: #333;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .history-item {
+            padding: 0.75rem;
+            background: #f9f9f9;
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr auto;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .history-item:last-child {
+            background: #e8f5e9;
+            border: 1px solid #4CAF50;
+        }
+
+        .reset-btn {
+            display: block;
+            width: 100%;
+            max-width: 200px;
+            margin: 0 auto;
+            padding: 0.75rem;
+            background: white;
+            color: #333;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .reset-btn:hover {
+            border-color: #4CAF50;
+            background: #f9f9f9;
+        }
+
+        .no-history {
+            text-align: center;
+            color: #999;
+            padding: 1rem;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Kivi-Paperi-Sakset</h1>
+            <p class="game-mode">{{ game_mode_name }}</p>
+        </div>
+
+        {% if game_over %}
+        <div class="game-over-banner">
+            <h2>Peli päättyi!</h2>
+            <p>{{ winner }} voitti pelin!</p>
+        </div>
+        {% endif %}
+
+        <div class="scoreboard">
+            <h2>Pisteet</h2>
+            <p class="win-requirement">Ensimmäinen 5 voittoon</p>
+            <div class="scores">
+                <div class="score-item">
+                    <div class="score-label">Pelaaja 1</div>
+                    <div class="score-value">{{ tuomari.ekan_pisteet }}</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-label">Tasapelit</div>
+                    <div class="score-value">{{ tuomari.tasapelit }}</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-label">{% if game_mode == 'a' %}Pelaaja 2{% else %}Tietokone{% endif %}</div>
+                    <div class="score-value">{{ tuomari.tokan_pisteet }}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="game-area {% if game_over %}disabled{% endif %}">
+            <h2>Valitse siirtosi</h2>
+            <form method="POST" action="/move" id="gameForm">
+                <div class="move-buttons">
+                    <input type="radio" name="player1_move" value="k" id="move_k" required>
+                    <label for="move_k" class="move-btn">Kivi</label>
+
+                    <input type="radio" name="player1_move" value="p" id="move_p" required>
+                    <label for="move_p" class="move-btn">Paperi</label>
+
+                    <input type="radio" name="player1_move" value="s" id="move_s" required>
+                    <label for="move_s" class="move-btn">Sakset</label>
+                </div>
+
+                {% if game_mode == 'a' %}
+                <div class="player2-input">
+                    <h3>Pelaaja 2 - Valitse siirtosi</h3>
+                    <div class="input-group">
+                        <input type="radio" name="player2_move" value="k" id="p2_k" required>
+                        <label for="p2_k">Kivi</label>
+
+                        <input type="radio" name="player2_move" value="p" id="p2_p" required>
+                        <label for="p2_p">Paperi</label>
+
+                        <input type="radio" name="player2_move" value="s" id="p2_s" required>
+                        <label for="p2_s">Sakset</label>
+                    </div>
+                </div>
+                {% endif %}
+
+                <button type="submit" class="submit-btn" {% if game_over %}disabled{% endif %}>
+                    {% if game_over %}Peli päättynyt{% else %}Pelaa kierros{% endif %}
+                </button>
+            </form>
+        </div>
+
+        {% if history %}
+        <div class="history">
+            <h2>Historia</h2>
+            {% for item in history|reverse %}
+            <div class="history-item">
+                <div style="text-align: right;">{{ item.player1 }}</div>
+                <div>vs</div>
+                <div>{{ item.player2 }}</div>
+                <div style="font-weight: bold;">{{ item.result }}</div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="history">
+            <div class="no-history">Ei vielä kierroksia</div>
+        </div>
+        {% endif %}
+
+        <a href="/reset" class="reset-btn">Palaa valikkoon</a>
+    </div>
+</body>
+</html>

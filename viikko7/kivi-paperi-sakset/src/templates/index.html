@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kivi-Paperi-Sakset</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 2rem;
+            font-size: 1.8rem;
+        }
+
+        .game-modes {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .mode-button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .mode-button:hover {
+            background: #45a049;
+        }
+
+        .mode-button:active {
+            background: #3d8b40;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Kivi-Paperi-Sakset</h1>
+        
+        <form method="POST" action="/start" class="game-modes">
+            <button type="submit" name="game_mode" value="a" class="mode-button">
+                Pelaaja vs Pelaaja
+            </button>
+            
+            <button type="submit" name="game_mode" value="b" class="mode-button">
+                Pelaaja vs Tekoäly
+            </button>
+            
+            <button type="submit" name="game_mode" value="c" class="mode-button">
+                Pelaaja vs Parannettu Tekoäly
+            </button>
+        </form>
+    </div>
+</body>
+</html>
